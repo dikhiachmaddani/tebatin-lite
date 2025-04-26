@@ -46,7 +46,7 @@ src/
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/yourusername/tebatin-lite.git
+   git clone https://github.com/dikhiachmaddani/tebatin-lite.git
    cd tebatin-lite
    ```
 
