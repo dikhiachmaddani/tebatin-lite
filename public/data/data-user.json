@@ -1,0 +1,10 @@
+{ 
+    "users": [
+        {
+            "id": "2r21f-fqw3f3-f23ff3",
+            "name": "Mas Joko",
+            "email": "admin@gmail.com",
+            "password": "rahasia123"
+        }
+    ]
+}

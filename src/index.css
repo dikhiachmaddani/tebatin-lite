@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.custom-menu .ant-menu-item-selected {
+  background-color: #513B18 !important;
+  color: white !important;
+}
+
+.custom-menu .ant-menu-item:hover {
+  background-color: #513B18 !important;
+  color: white !important;
+}
+
+.custom-menu .ant-menu-item-active {
+  background-color: #513B18 !important;
+  color: white !important;
+}
