@@ -22,10 +22,10 @@ const { Paragraph, Text } = Typography;
 export function DetailHome() {
     const { id } = useParams();
     const { data, isLoading } = useGetListProduct();
+    const { addToCart } = useContext(GeneralContext) as GeneralContextType;
     const product = data?.data.product.find((product) => product.id === id);
     if (isLoading) return <DetailPageSkeleton />;
     if (!product) return <NotFound />;
-    const { addToCart } = useContext(GeneralContext) as GeneralContextType;
 
     const handleAddToCart = () => {
         addToCart({ ...product, quantity: 1 });
