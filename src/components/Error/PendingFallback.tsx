@@ -1,10 +1,37 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
-export type PendingFallbackProps = {};
-/* eslint-enable @typescript-eslint/no-empty-object-type */
+import { Spin } from "antd";
+import { CSSProperties } from "react";
+import { customThemeColors } from "../../utils/theme";
+
+
+const blurLayoutStyle: CSSProperties = {
+	backgroundColor: customThemeColors.neutral[10],
+	position: "fixed",
+	height: "100%",
+	zIndex: 1,
+	width: "100%",
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+	opacity: 0.7,
+};
+const spinnerContainer: CSSProperties = {
+	position: "fixed",
+	display: "flex",
+	flexDirection: "column",
+	zIndex: 3,
+	justifyContent: "center",
+	alignItems: "center",
+	width: "100%",
+	height: "100%",
+};
+
 export function PendingFallback() {
 	return (
-		<div aria-label="Loading" className="w-full h-screen flex items-center justify-center text-xl">
-			<p>Loading...</p>
-		</div>
+		<>
+			<div style={blurLayoutStyle}></div>
+			<div style={spinnerContainer}>
+				<Spin size="large" />
+			</div>
+		</>
 	);
 }

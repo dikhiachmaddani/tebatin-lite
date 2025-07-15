@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined, StarFilled } from '@ant-design/icons';
+import { ShoppingCartOutlined, ShoppingFilled, StarFilled } from '@ant-design/icons';
 import {
     Breadcrumb,
     Button,
@@ -7,10 +7,10 @@ import {
     Typography
 } from 'antd';
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumbs } from '../../../../common/breadcrumbs';
 import { GeneralContext, GeneralContextType } from '../../../../common/context/GeneralContext';
-import { backgroundCoverStyle, blackButtonFullWidthStyle } from '../../../../utils/style';
+import { backgroundCoverStyle, blackButtonFullWidthStyle, blackButtonFullWidthStyleOutline } from '../../../../utils/style';
 import { customThemeColors } from '../../../../utils/theme';
 import { formatCurrency } from '../../../../utils/utils';
 import { NotFound } from '../../../not-found';
@@ -21,8 +21,9 @@ const { Paragraph, Text } = Typography;
 
 export function DetailHome() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { data, isLoading } = useGetListProduct();
-    const { addToCart } = useContext(GeneralContext) as GeneralContextType;
+    const { addToCart, cartItems } = useContext(GeneralContext) as GeneralContextType;
     const product = data?.data.product.find((product) => product.id === id);
     if (isLoading) return <DetailPageSkeleton />;
     if (!product) return <NotFound />;
@@ -30,6 +31,12 @@ export function DetailHome() {
     const handleAddToCart = () => {
         addToCart({ ...product, quantity: 1 });
     };
+
+    const handleBuyNow = () => {
+        addToCart({ ...product, quantity: 1 });
+        navigate('/cart');
+    };
+    const isInCart = cartItems.some((item) => item.id === product.id);
     return (
         <section>
             <Breadcrumb style={{ marginBottom: 20 }} items={Breadcrumbs.HomePage.Detail} />
@@ -58,10 +65,15 @@ export function DetailHome() {
                         <h2>{formatCurrency(product.price)}</h2>
 
                         <Paragraph style={{ marginTop: 10 }}>{product.description}</Paragraph>
-                        <Row style={{ width: '100%' }}>
+                        <Row gutter={[10, 10]} style={{ width: '100%' }}>
                             <Col span={24}>
-                                <Button onClick={handleAddToCart} icon={<ShoppingCartOutlined />} style={blackButtonFullWidthStyle}>
-                                    Add to Cart
+                                <Button onClick={handleBuyNow} icon={<ShoppingFilled />} style={blackButtonFullWidthStyle}>
+                                    Beli Sekarang
+                                </Button>
+                            </Col>
+                            <Col span={24}>
+                                <Button onClick={handleAddToCart} icon={<ShoppingCartOutlined />} disabled={isInCart} style={blackButtonFullWidthStyleOutline}>
+                                    {isInCart ? 'Sudah di Keranjang' : 'Tambah ke Keranjang'}
                                 </Button>
                             </Col>
                         </Row>

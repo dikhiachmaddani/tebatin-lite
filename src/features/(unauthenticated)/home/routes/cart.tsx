@@ -18,8 +18,11 @@ import CardCartItem from '../components/CardCartItem';
 const { Text } = Typography;
 
 export function Cart() {
-    const { cartItems, removeFromCart } = useContext(GeneralContext) as GeneralContextType;
-
+    const { cartItems, removeFromCart, updateCartItem } = useContext(GeneralContext) as GeneralContextType;
+    const handleChangeQuantity = (id: string, value: number) => {
+        updateCartItem(id, value);
+    };
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     return (
         <Form>
             <h1 style={{ marginTop: "25px", marginBottom: "10px" }}>Cart</h1>
@@ -30,7 +33,7 @@ export function Cart() {
                     <Row gutter={[16, 16]}>
                         {cartItems.length > 0 ? cartItems.map((items) =>
                             <Col span={24}>
-                                <CardCartItem cart={items} handleRemoveItem={removeFromCart} />
+                                <CardCartItem cart={items} handleRemoveItem={removeFromCart} handleChangeQuantity={handleChangeQuantity} />
                             </Col>
                         ) : <Col span={24}>
                             <section style={{ backgroundColor: customThemeColors.neutral[20], borderRadius: '10px', padding: 20 }}>
@@ -48,7 +51,7 @@ export function Cart() {
                             <Col span={24}>
                                 <Flex align='center' justify='space-between'>
                                     <Text type="secondary">Sub Total: </Text>
-                                    <Text strong>{cartItems.length > 0 && formatCurrency(200000)}</Text>
+                                    <Text strong>{cartItems.length > 0 && formatCurrency(totalPrice)}</Text>
                                 </Flex>
                             </Col>
                             <Col span={24}>
@@ -60,12 +63,12 @@ export function Cart() {
                             <Col span={24}>
                                 <Flex align='center' justify='space-between'>
                                     <Text type="secondary">Total: </Text>
-                                    <Text strong>{cartItems.length > 0 && formatCurrency(210000)}</Text>
+                                    <Text strong>{cartItems.length > 0 && formatCurrency(totalPrice + 10000)}</Text>
                                 </Flex>
                             </Col>
                         </Row>
                         <Button disabled={cartItems.length < 0} type='default' style={blackButtonFullWidthStyle}>
-                            Make Payment
+                            Checkout Sekarang
                         </Button>
                     </section>
                 </Col>

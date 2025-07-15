@@ -22,3 +22,9 @@ export const removeFromCart = (cart: CartItem[], id: string): CartItem[] => {
     saveCartToLocalStorage(updatedCart);
     return updatedCart;
 };
+
+export const updateCartItem = (cart: CartItem[], id: string, quantity: number): CartItem[] => {
+    const updatedCart = cart.map((item) => item.id === id ? { ...item, quantity } : item);
+    saveCartToLocalStorage(updatedCart);
+    return updatedCart;
+};

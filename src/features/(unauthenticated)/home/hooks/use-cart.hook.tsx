@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addToCart, getCartFromLocalStorage, removeFromCart } from "../../../../modules/product/local-storage";
+import { addToCart, getCartFromLocalStorage, removeFromCart, updateCartItem } from "../../../../modules/product/local-storage";
 import { CartItem } from "../../../../modules/product/type";
 
 export const useCart = () => {
@@ -17,9 +17,15 @@ export const useCart = () => {
     setCartItems(updatedCart);
   };
 
+  const updateCartItemHandler = (id: string, quantity: number) => {
+    const updatedCart = updateCartItem(cartItems, id, quantity);
+    setCartItems(updatedCart);
+  };
+
   return {
     cartItems,
     addToCart: addToCartHandler,
     removeFromCart: removeFromCartHandler,
+    updateCartItem: updateCartItemHandler,
   };
 };

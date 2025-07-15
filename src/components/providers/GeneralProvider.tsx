@@ -9,7 +9,7 @@ interface GeneralProviderProps {
 }
 
 export function GeneralProvider({ children }: GeneralProviderProps) {
-    const { cartItems, addToCart, removeFromCart } = useCart();
+    const { cartItems, addToCart, removeFromCart, updateCartItem } = useCart();
     const { tasks, addTask, removeTask, toggleTaskCompletion } = useTasks();
     const { user, addUser, loginUser, loggedInUser, logoutUser } = useUser();
 
@@ -18,6 +18,7 @@ export function GeneralProvider({ children }: GeneralProviderProps) {
             cartItems,
             addToCart,
             removeFromCart,
+            updateCartItem,
 
             tasks,
             addTask,

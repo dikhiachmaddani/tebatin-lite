@@ -1,8 +1,6 @@
 import { PropsWithChildren, Suspense as ReactSuspense } from 'react';
-import { PendingFallback, type PendingFallbackProps } from './PendingFallback';
+import { PendingFallback } from './PendingFallback';
 
-export type SuspenseProps = PendingFallbackProps;
-
-export function Suspense({ children, ...restProps }: PropsWithChildren<SuspenseProps>) {
-	return <ReactSuspense fallback={<PendingFallback {...restProps} />}>{children}</ReactSuspense>;
+export function Suspense({ children }: PropsWithChildren) {
+	return <ReactSuspense fallback={<PendingFallback />}>{children}</ReactSuspense>;
 }

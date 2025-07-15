@@ -7,6 +7,7 @@ export interface GeneralContextType {
     cartItems: CartItem[];
     addToCart: (item: CartItem) => void;
     removeFromCart: (id: string) => void;
+    updateCartItem: (id: string, quantity: number) => void;
 
     tasks: TaskManagement[];
     addTask: (task: TaskManagement) => void;

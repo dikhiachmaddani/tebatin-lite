@@ -9,6 +9,14 @@ export const blackButtonFullWidthStyle: CSSProperties = {
     padding: 20
 }
 
+export const blackButtonFullWidthStyleOutline: CSSProperties = {
+    width: '100%',
+    backgroundColor: "transparent",
+    color: customThemeColors.neutral[80],
+    padding: 20,
+    border: `1px solid ${customThemeColors.neutral[80]}`
+}
+
 export const primaryButtonStyle: CSSProperties = {
     backgroundColor: customThemeColors.primary.main,
     color: "#fff",
